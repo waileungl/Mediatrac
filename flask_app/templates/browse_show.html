@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <!-- main box -->
+    <!-- Search Container -->
+    <div class="searchContainer">
+        <div class="searchElement">
+            <h2 class="text-center mt-5">Find Movie, TV series, Anime</h2>
+            <input class="form-control" type="text" placeholder="Search title here"  id="showSearchBox" onclick="findShows()" onkeyup="findShows()">
+            <div class="searchList" id="searchList">
+                <!-- search list print out here when typing -->
+            </div>
+        </div>
+    </div>
+    <!-- end search container -->
+
+    <!-- results display -->
+    <div class="bottomContainer">
+        <div class="resultContainer">
+            <!-- show info here -->
+            <div class="resultGrid" id="resultGrid">
+                <!-- details of shows print out here -->
+            </div>
+            <!-- end show info -->
+        </div>
+    </div>
+    <!-- end main box-->
+{% endblock %}

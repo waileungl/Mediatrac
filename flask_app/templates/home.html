@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trac</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="navBar">
+            <h2><i class='bx bx-tv bx-tada' ></i> Trac</h2>
+            <div class="navBarList">
+                <div><a href="/home"><i class='bx bx-home'></i>Home</a></div>
+                <div><a href="/browse_shows"><i class='bx bx-library'></i>Browse Film</a></div>
+                <div><a href="/show/Want"><i class='bx bx-time-five'></i>Want</a></div>
+                <div><a href="/show/Watching"><i class='bx bx-movie-play'></i>Watching</a></div>
+                <div><a href="/show/Watched"><i class='bx bx-checkbox-minus'></i>Watched</a></div>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="navTop">
+                <div class="userIcon">
+                    <i class='bx bx-user'></i>
+                    <h6>Welcome back, {{ session["user_name"] }}</h6>
+                </div>
+                <a href="/logout" class="btn btn-outline-danger mx-4">Logout</a>
+            </div>
+            {% block content %}
+            <main class="homeContainer">
+                <div class="content">
+                    <h3>Watching...</h3>
+                    <div>
+                    {% for show in five_watching_shows %}
+                        <div><img class="img-fluid img-thumbnail" src="{{ show.poster }}" alt="poster"></div>
+                    {% endfor %}
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>To watch...</h3>
+                    <div>
+                    {% for show in five_to_watch_shows %}
+                        <div><img class="img-fluid img-thumbnail" src="{{ show.poster }}" alt="poster"></div>
+                    {% endfor %}
+                    </div>
+                </div>
+            </main>
+            {% endblock %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+        integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+        crossorigin="anonymous"></script>
+    <script src="{{ url_for('static',filename='js/script.js') }}"></script>
+</body>
+
+</html>

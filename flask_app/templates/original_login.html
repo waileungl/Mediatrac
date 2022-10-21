@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRAC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="row">
+        <h1 class="p-4 ms-5 text-light row">TRAC</h1><p class="ms-5 text-light row">The best personal watch planner</p>
+    </div>
+    <div class="d-flex justify-content-center" id="mainBody">
+        <form class="mx-5" action="/register" method="post">
+            <main class="col">
+                {% with messages = get_flashed_messages(category_filter = ["registration"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div id="passwordHelpBlock" class="form-text">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <h3 class="my-4">Register</h3>
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">User Name: </label>
+                    <input name="name" type="text" class="form-control" id="name">
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email: </label>
+                    <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+    
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password: </label>
+                    <input name="password" type="password" class="form-control" id="password">
+                </div>
+    
+                <div class="mb-3">
+                    <label for="confirm_password" class="form-label">Confirm Password:</label>
+                    <input name="confirm_password" type="password" class="form-control" id="confirm_password">
+                </div>
+    
+            </main>
+            
+        </form>
+    
+        <form class="mx-5 w-25" action="/login" method="post">
+            <main>
+                <h3 class="my-4">Log in</h3>
+                {% with messages = get_flashed_messages(category_filter = ["login"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div id="passwordHelpBlock" class="form-text">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <div class="mb-3 col-8">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input name="login_email" type="email" class="form-control" id="exampleInputEmail1">
+                </div>
+                <div class="mb-3 col-8">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input name="login_password" type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </main>
+        </form>
+    </div>
+</body>
+
+</html>

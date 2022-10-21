@@ -1,0 +1,153 @@
+{% extends "index.html" %}
+
+{% block content %}
+<form action="/add_show" method="post" style="margin-top: 12vh;">
+<main class="homeContainer container">
+    <a href="/home" class="logout-btn">Back</a>
+    <div class="show-content-wrapper">
+        <div class="showPoster">
+            <img src="{{ info[0].poster }}" alt="Sorry, currently no poster for this movie">
+        </div>
+        <div class="showInfo">
+            <h3 class="showTitle">{{ info[0].title }} <span class="showYear"> ({{ info[0].year }})</span></h3>
+            <div class="showTinyInfo">
+                <div class="rated"><span class="badge rounded-pill text-bg-secondary">PG-13</span> </div>
+                <div class="runtime"><span class="badge rounded-pill text-bg-secondary">{{ info[0].runtime }}</span></div>
+                <div class="type"><span class="badge rounded-pill text-bg-secondary">{{ info[0].type }}</span> </div>
+            </div>
+            <p class="writer"><b>Writer:</b> Lorem</p>
+            <p class="actors"><b>Actors:</b> Lorem</p>
+            <p class="genre"><b>Genre:</b> {{ info[0].genre }}</p>
+            <p class="country"><b>Country:</b> {{ info[0].country }}</p>
+            <p class="language"><b>Language:</b> English</p>
+            <p class="released"><b>Released:</b> {{ info[0].released }}</p>
+            <p class="boxOffice"><b>Box office:</b> 100,0000</p>
+            <p class = "awards"><b><i class = "fas fa-award"></i></b> <span class="badge rounded-pill text-bg-warning">10 Nomination</span>
+            </p>
+        </div>
+        <div class="showRatingBox">
+            <p class="rating"><b>imdb Rating:</b> <i class='bx bxs-star'></i> {{ info[0].rating }} /10</p>
+            <p class="myRating"><b>My Rating:</b> <i class='bx bxs-star'></i> {% if info[0].user_rating != 0 %} {{ info[0].user_rating }} /10 {% else %} null {% endif %} </p>
+            <div class="user_interaction">
+                <a class="btn btn-light" data-bs-toggle="modal" data-bs-target="#Watching_modal">Watching</a>
+                <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#Watched_modal">Rate</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="plot-wrapper">
+        <div class="heading">
+            <h2 class="heading-title">Story</h2>
+        </div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, explicabo. Amet officia rerum eaque. Ipsa fugit explicabo ab, rem, quod inventore nihil et assumenda tempora non laboriosam earum quidem omnis!</p>
+    </div>
+
+    <div class="user-comment-wrapper">
+        <div class="heading">
+            <h2 class="heading-title">Users' review</h2>
+        </div>
+        {% for comment in info[1] %}
+        <div class="user-comment-box">
+            <h4>{% if comment.user_id == session["id"] %} My {% else %} {{ comment.name }}'s  {% endif %}  review {% if not comment.user_id == session["id"] %} <a href="#"><span class="badge rounded-pill text-bg-warning" style="font-size: 1rem;">42 likes</span></a> {% endif %}</h4>
+            <p>{{ comment.comment }}</p>
+            <p><i class='bx bxs-star' style="color: gold;"></i>  {{ comment.user_rating }}/10 </p>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+</form>
+
+    <!-- modal here -->
+    <!-- for user to move to watch later -->
+    <form action="/move_show_to_other_status/Want/{{ info[0].status }}/{{ info[0].id }}" method="post">
+        <div class="modal fade" id="Want_modal" role="dialog">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content" style="background: rgb(26, 25, 25);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title">Watch later</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <button type="submit" class="btn btn-danger">Yes</button>
+                            <a class="btn btn-light" data-bs-dismiss="modal">Close</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- for user to select season and episode -->
+    <form action="/move_show_to_other_status/Watching/{{ info[0].status }}/{{ info[0].id }}" method="post">
+        <div class="modal fade" id="Watching_modal" role="dialog">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content" style="background: rgb(26, 25, 25);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title">Watching...</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="modal-season" class="form-label">Season</label>
+                        <input type="number" class="form-control" id="modal-season" name="season" value="">
+                        <label for="modal-episode" class="form-label">Episode</label>
+                        <input type="number" class="form-control" id="modal-episode" name="episode" value="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-secondary">It's a movie!</button>
+                        <button type="submit" class="btn btn-success">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- for user to comment and rate -->
+    <form action="/move_show_to_other_status/Watched/{{ info[0].status }}/{{ info[0].id }}" method="post">
+        <div class="modal fade" id="Watched_modal" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="background: rgb(26, 25, 25);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title">How was it?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="modal-rating" class="form-label">Rate</label>
+                        <input type="number" class="form-control" id="modal-rating" name="user_rating" value="">
+                        <label for="modal-comment" class="form-label">Comment</label>
+                        <textarea name="comment" class="form-control" id="modal-comment" cols="30" rows="4"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- for user to remove the show -->
+    <form action="/move_show_to_other_status/remove/{{ info[0].status }}/{{ info[0].id }}" method="post">
+        <div class="modal fade" id="remove_modal" role="dialog">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content" style="background: rgb(26, 25, 25);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title">Remove</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <button type="submit" class="btn btn-danger">Confirm</button>
+                            <a class="btn btn-light" data-bs-dismiss="modal">Close</a>
+                        </div>
+                    </div>
+                    <!-- <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- modal end -->
+
+{% endblock %}
+
+
+

@@ -1,0 +1,750 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+
+}
+
+:root {
+    --main-color: #ffb43a;
+    --hover-color: #f7a727;
+    --body-color:rgb(26, 25, 25);
+    --container-color:rgb(55, 55, 55);
+    --text-color:#fcfeff;
+}
+
+a{
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+img{
+    width:100%;
+}
+
+body{
+    background: var(--body-color);
+    color:var(--text-color);
+}
+
+section{
+    padding: 3rem 0 2rem;
+}
+
+.container{
+    max-width: 1060px;
+    margin: auto;
+    width: 100%;
+}
+
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--body-color);
+    z-index: 100;
+}
+
+.nav{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.logo{
+    font-size:1.6rem;
+    color: var(--text-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0 auto 0 0;
+}
+
+.logo span {
+    color: var(--main-color);
+}
+
+
+.navbar{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 18px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2.1rem;
+}
+
+.nav-link{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #b7b7b7;
+}
+
+.nav-link:hover,
+.nav-active {
+    color: var(--text-color);
+    transition: 0.3s all linear;
+    transform: scale(1.1);
+}
+
+
+.nav-link .bx {
+    font-size: 1.6rem;
+}
+
+.nav-link-title {
+    font-size: 0.7rem;
+}
+
+/* home */
+
+.home{
+    position: relative;
+    min-height: 470;
+    display: flex;
+    align-items: center;
+    margin-top: 5rem !important;
+    border-radius: 0.5rem;
+}
+
+#home{
+    background: linear-gradient(8deg, hsl(240 17% 14% / 74%) 14%, hsl(240 17% 14% / 14%) 44%);
+}
+
+.home-img{
+    position: absolute;
+    right: 0;
+    width: 100%;
+    height: 95%;
+    z-index: -1;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+.home-text{
+    padding-left: 40px;
+}
+
+
+.home-title{
+    font-size: 2rem;
+    font-weight: 600;
+    margin-top: 250px;
+}
+.home-text p{
+    font-size: 0.9rem;
+    margin: 10px 0 20px;
+    color: var(--main-color);
+}
+
+.watch-btn{
+    display: flex;
+    align-items: center;
+    column-gap: 0.7rem;
+    color: var(--text-color);
+}
+
+.watch-btn:hover{
+    color: var(--hover-color);
+    transition: 0.3s all linear;
+}
+
+/* target the movie comment button */
+.comment-btn{
+    position: absolute;
+    bottom: 0.8rem;
+    right: 0.8rem;
+}
+
+.watch-btn .bx{
+    font-size: 21px;
+    background: var(--main-color);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.watch-btn .bx:hover{
+    background: var(--hover-color);
+}
+
+.watch-btn span{
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.heading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--container-color);
+    padding: 8px 14px;
+    border: 1px solid hsl(200 100% 99% / 5%);
+    margin-bottom: 2rem;
+}
+
+.heading-title{
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* movie box */
+.movie-box{
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+}
+
+.movie-box-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.movie-box .box-text{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 14px;
+    /* make the bottom of poster darker */
+    background: linear-gradient(8deg, hsl(240 17% 14% / 74%) 14%, hsl(240 17% 14% / 14%) 44%);
+    overflow: hidden;
+}
+
+.movie-title{
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding-right: 20px;
+}
+
+#movie-title-color{
+    color: var(--text-color);
+}
+
+#movie-title-color:hover{
+    color: var(--hover-color)
+}
+
+.movie-progress{
+    font-size: 0.9rem;
+    padding-right: 20px;
+}
+
+/* relocated swiper btns */
+.swiper-btn{
+    display: flex;
+}
+
+.swiper-button-next,
+.swiper-button-prev{
+    position: static !important;
+    margin: 0 0 0 10px !important;
+}
+
+/* ? */
+.swiper-button-next::after,
+.swiper-button-prev::after{
+    color: var(--text-color);
+    font-size: 20px !important;
+    font-weight: 700;
+}
+
+
+/* movies to watch */
+.movies .heading{
+    padding: 10px 14px;
+}
+
+.movies-content{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(247px, 1fr));
+    gap: 1.5rem;
+}
+
+.movies-content .movie-box:hover .movie-box-img{
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+
+.watched-page{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2.5rem;
+}
+
+.watched-btn{
+    background: var(--main-color);
+    padding: 12px 20px;
+    color: var(--text-color);
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+.watched-btn:hover{
+    background: var(--hover-color);
+    transition: 0.4s all linear;
+}
+
+.copyright{
+    text-align: center;
+    padding: 40px;
+}
+
+
+.logout-btn{
+    background: var(--container-color);
+    padding: 12px 20px;
+    color: var(--text-color);
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+.logout-btn:hover{
+    color: var(--text-color);
+    background: var(--hover-color);
+    transition: 0.4s all linear;
+}
+
+/* Start make the page responsive */
+@media (max-width:1170px){
+    .navbar{
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto;
+        transform: translateY(0);
+        flex-direction: row;
+        justify-content: space-evenly;
+        row-gap: 1px;
+        padding: 10px;
+        border-top: 1px solid black;
+        background: linear-gradient(8deg, hsl(240 17% 14% / 100%) 5%,  hsl(240 17% 14% / 90%) 100%);
+    }
+    .nav-link .bx{
+        font-size: 1.2rem;
+    }
+    .copyright{
+        margin-bottom: 4rem;
+    }
+    .container{
+        margin: 0 auto;
+        width: 95%;
+    }
+    .movie-box{
+        height: 340px;
+    }
+    .movies-content{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(214px, 1fr));
+    }
+    .logout-btn{
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 888px) {
+    .nav{
+        padding: 14px 0;
+    }
+    .home{
+        min-height: 440px;
+        margin-top: 4rem !important;
+    }
+    .home-text{
+        padding-left: 25px;
+    }
+    .home-title{
+        font-size: 1.6rem;
+    }
+    .watch-btn span{
+        font-size: 0.8rem;
+    }
+    .movie-title{
+        font-size: 0.8rem;
+        padding-right: 30px;
+    }
+    .movie-progress{
+        font-size: 0.6rem;
+    }
+}
+
+
+/* small device */
+@media(max-width: 412px){
+    .home{
+        min-height: 300px;
+    }
+    .movie-box{
+        height: 260px;
+    }
+    .comment-btn .bx{
+        width: 35px;
+        height: 35px;
+    }
+    .navbar{
+        justify-content: space-around;
+        padding: 8px 0;
+    }
+    .nav-link .bx{
+        font-size: 1.2rem;
+    }
+}
+
+
+/* explore page */
+
+.searchContainer{
+    margin-top: 10%;
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchElement{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    width: 40%;
+}
+
+.searchList{
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    max-height: 500px;
+    overflow-y: scroll;
+    z-index: 5;
+}
+
+.searchList .searchListItem{
+    display: flex;
+    justify-items: stretch;
+    width: 100%;
+    background-color:#1f1f1f;
+    height: 100%;
+    cursor: pointer;
+    padding: 2%;
+    border-bottom: #303030 solid 2px;
+}
+
+.searchList .searchListItem:Hover{
+    background-color: lightslategray;
+}
+
+.searchListItem .searchItemThumbnail{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+
+.searchListItem .searchItemThumbnail img{
+    width: 65%;
+}
+
+.searchListItem .searchItemInfo{
+    font-size: 0.8rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start
+}
+
+.hideSearchList{
+    display: none;
+}
+
+.resultGrid{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.resultGrid form{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.showPoster{
+    width: 30%;
+    padding: 3%;
+}
+
+.showPoster img{
+    width: 100%;
+    border: whitesmoke 5px solid;
+}
+
+.showInfo{
+    padding: 3%;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.showInfo .showTitle{
+    color: gold;
+}
+
+.showRatingBox{
+    padding: 3%;
+    width: 34%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.showRatingBox i{
+    color: gold;
+}
+
+/* end explore page */
+
+
+/* hide the modal form in home page */
+.hide-form{
+    position: absolute;
+}
+
+/* old css */
+
+.homeContainer .libraryList{
+    /* background-color: grey; */
+    margin: 110px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.homeContainer .libraryList nav{
+    height: 5vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-badge{
+    font-size: 0.8rem;
+}
+
+.nav-badge:hover{
+    font-size: 0.85rem;
+}
+
+.libraryList .listBox{
+    height: 35vh;
+    width: 100%;
+    display: flex;
+    background-color: aliceblue;
+    background-color: var(--container-color);
+    border-radius: 15px;
+    color: #07051a;
+    margin: 1% 0;
+    padding: 30px 0;
+}
+
+.listBoxLeft{
+    margin: 0 20px;
+}
+
+
+
+.listBox .listBoxMid{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    color: var(--text-color);
+    width: 50%;
+    margin: 0 10px;
+}
+
+.listBoxMid .listBoxMidTiny{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.listBoxMid .listBoxMidButton{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10%;
+}
+
+.listBoxRight{
+    color: var(--text-color);
+    gap: 6%;
+    margin-left: 25px;
+    width: 25%;
+}
+
+
+#overflow-comment{
+    overflow: auto;
+}
+
+.list-box-rating{
+    font-weight: 700;
+}
+
+.list-box-comment{
+    font-weight: 700;
+}
+
+.rate-section{
+    font-size: 400;
+}
+/* end old css */
+
+
+/* new css for library */
+.want-btn{
+    display: flex;
+    align-items: center;
+    column-gap: 0.7rem;
+    color: var(--text-color);
+}
+
+.want-btn .bx{
+    font-size: 21px;
+    background: var(--main-color);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.want-btn:hover{
+    transition: 0.4s all linear;
+}
+
+.watching-btn{
+    display: flex;
+    align-items: center;
+    column-gap: 0.7rem;
+    color: var(--text-color);
+}
+
+.watching-btn .bx{
+    font-size: 21px;
+    background: var(--main-color);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.watching-btn .bx:hover{
+    transition: 0.4s all linear;
+}
+
+
+.watched-small-btn{
+    display: flex;
+    align-items: center;
+    column-gap: 0.7rem;
+    color: var(--text-color);
+}
+
+.watched-small-btn .bx{
+    font-size: 16px;
+    background: var(--main-color);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.watched-small-btn .bx:hover{
+    transition: 0.4s all linear;
+}
+
+.delete-btn{
+    display: flex;
+    align-items: center;
+    column-gap: 0.7rem;
+    color: var(--text-color);
+}
+
+.delete-btn .bx{
+    font-size: 21px;
+    background: salmon;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-btn .bx:hover{
+    transition: 0.4s all linear;
+}
+/* End new css for library */
+
+
+/* selected show page */
+.show-content-wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.showTinyInfo{
+    display: flex;
+    gap: 8px;
+    margin: 20px 0;
+}
+
+.user_interaction{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.user-comment-wrapper{
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.user-comment-box{
+    margin-bottom: 50px;
+}
+
+
+/* end selected show page */

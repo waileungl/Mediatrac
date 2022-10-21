@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mediatrac</title>
+    <!-- bootstrap script -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- bootstrap css -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <!-- swiper css -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/swiper-bundle.min.css') }}">
+    <!-- box icon -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- my css -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/mediatrac.css') }}">
+</head>
+
+<body>
+    <header>
+        <div class="nav container">
+            <a href="/home" class="logo">
+                Media<span>trac</span>
+            </a>
+            <a href="/logout" class="logout-btn">logout</a>
+            <div class="navbar">
+                <a href="/home" class="nav-link nav-active">
+                    <i class='bx bx-home'></i>
+                    <span class="nav-link-title">Home</span>
+                </a>
+                <a href="/browse_shows" class="nav-link">
+                    <i class='bx bx-compass'></i>
+                    <span class="nav-link-title">Explore</span>
+                </a>
+                <a href="/show/Watched" class="nav-link">
+                    <i class='bx bx-library'></i>
+                    <span class="nav-link-title">Collection</span>
+                </a>
+                <a href="/home" class="nav-link">
+                    <i class='bx bx-heart'></i>
+                    <span class="nav-link-title">Favourite</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    {% block content %}
+    <!-- home -->
+    <section class="home container" id="home">
+        <img src="{{ url_for('static',filename='img/home_big.jpg') }}" alt="home page" class="home-img">
+        <div class="home-text">
+            <h1 class="home-title">
+                Welcome back <br> {{ session["user_name"] }}!
+            </h1>
+            <p>What do you want to watch today?</p>
+            <a href="/browse_shows" class="watch-btn">
+                <i class='bx bx-play'></i>
+                <span>Explore</span>
+            </a>
+        </div>
+    </section>
+    <!-- home end -->
+
+    <!-- watching section -->
+    <section class="popular container" id="popular">
+        <!-- heading "watching" -->
+        <div class="heading">
+            <a href="/show/Watching" style="color: #fcfeff;"><h2 class="heading-title">Watching</h2></a>
+            <!-- swiper btn relocation to here -->
+            <div class="swiper-btn">
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+
+        <!-- content -->
+        <div class="watching-content swiper">
+            <div class="swiper-wrapper">
+                <!-- watching movie boxes -->
+                {% for show in ten_watching_shows %}
+                <div class="swiper-slide">
+                    <div class="movie-box">
+                        <img src="{{ show.poster }}" alt="" class="movie-box-img">
+                        <div class="box-text">
+                            <h2 class="movie-title"><a href="/show/selected/{{ show.id }}" ><span id="movie-title-color">{{ show.title }}</span></a></h2>
+                            {% if show.type == "series" %}
+                            <span class="movie-progress">
+                                <span class="badge rounded-pill text-bg-dark">Season {{ show.season }}</span>
+                                <span class="badge rounded-pill text-bg-warning">Episode {{ show.episode }}</span>
+                            </span>
+                            {% endif %}
+                            <!-- <a href="#" class="watch-btn comment-btn">
+                                <i class='bx bxs-message-dots'></i>
+                            </a> -->
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- watching section end -->
+    
+    <!-- library section start -->
+    <section class="movies container" id="movies">
+        <div class="heading">
+            <a href="/show/Want" style="color: #fcfeff;"><h2 class="heading-title">Watch Later</h2></a>
+        </div>
+        <!-- to watch content -->
+        <div class="movies-content">
+            <!-- movie boxes -->
+            {% for show in ten_to_watch_shows %}
+            <div class="movie-box">
+                <img src="{{ show.poster }}" alt="" class="movie-box-img">
+                <div class="box-text">
+                    <h2 class="movie-title"><a href="/show/selected/{{ show.id }}" ><span id="movie-title-color">{{ show.title }}</span></a></h2>
+                    <span class="movie-progress">{{ show.genre }}</span>
+                    {% if show.type == "movie" %}
+                    <a href="/move_movie_to_watching/Watching/{{ show.status }}/{{ show.id }}" class="watch-btn comment-btn">
+                        <i class='bx bx-play'></i>
+                    </a>
+                    {% endif %}
+                    {% if show.type == "series" %}
+                    <a href="#" class="watch-btn comment-btn" data-bs-toggle="modal" data-bs-target="#Watching_modal">
+                        <i class='bx bx-play'></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- to prevent modal occupying space -->
+            <div class="hide-form">
+                <!-- modal here -->
+                <!-- for user to select season and episode -->
+                <form action="/move_show_to_other_status/Watching/{{ show.status }}/{{ show.id }}" method="post">
+                    <div class="modal fade" id="Watching_modal" role="dialog">
+                        <div class="modal-dialog modal-sm modal-dialog-centered">
+                            <div class="modal-content" style="background-color: rgb(26, 25, 25);">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modal-title">Watching...</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <label for="modal-season" class="form-label">Season</label>
+                                    <input type="number" class="form-control" id="modal-season" name="season" value="">
+                                    <label for="modal-episode" class="form-label">Episode</label>
+                                    <input type="number" class="form-control" id="modal-episode" name="episode" value="">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- for user to rate and comment the show -->
+                <form action="/move_show_to_other_status/Watched/{{ show.status }}/{{ show.id }}" method="post">
+                    <div class="modal fade" id="Watched_modal" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content" style="background-color: rgb(26, 25, 25);">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modal-title">Rate and Comment</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <label for="modal-rate" class="form-label">Rate (out of 10)</label>
+                                    <input type="number" class="form-control" id="modal-rate" name="user_rating" value="">
+                                    <label for="modal-comment" class="form-label">Comment</label>
+                                    <textarea name="comment" id="modal-comment" cols="20" rows="4" class="form-control"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-secondary">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- for user to remove the show -->
+                <form action="/move_show_to_other_status/remove/{{ show.status }}/{{ show.id }}" method="post">
+                    <div class="modal fade" id="remove_modal" role="dialog">
+                        <div class="modal-dialog modal-sm modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header" style="color: black;">
+                                    <h5 class="modal-title" id="modal-title">Remove</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <button type="submit" class="btn btn-danger">Confirm</button>
+                                        <a class="btn btn-light" data-bs-dismiss="modal">Close</a>
+                                    </div>
+                                </div>
+                                <!-- <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- modal end -->
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <!-- library section end -->
+
+    <!-- redirect to watched page -->
+    <div class="watched-page">
+        <a href="/show/Watched" class="watched-btn">Watched Collection</a>
+    </div>
+    {% endblock %}
+    <!-- copyright -->
+    <div class="copyright">
+        <p>© Developer: William Liu</p>
+    </div>
+
+
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+        integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+        crossorigin="anonymous"></script>
+    <!-- swiper js -->
+    <script src="{{ url_for('static',filename='js/swiper-bundle.min.js') }}"></script>
+    <!-- my js -->
+    <script src="{{ url_for('static',filename='js/mediatrac.js') }}"></script>
+</body>
+
+</html>
