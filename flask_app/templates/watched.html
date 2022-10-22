@@ -37,19 +37,19 @@
                     <p><span class="badge rounded-pill text-bg-warning">{{ show.runtime }}</span></p>&ensp;<p><span class="badge rounded-pill text-bg-warning">{{ show.genre }}</span></p>
                 </div>
                 <div class="listBoxMidButton">
-                    <a href="#" class="want-btn" data-bs-toggle="modal" data-bs-target="#Want_modal"><i class='bx bx-plus'></i></a>
+                    <a href="#" class="want-btn" data-bs-toggle="modal" data-bs-target="#Want_modal{{ show.id }}"><i class='bx bx-plus'></i></a>
                     {% if show.type == "movie" %}
                     <a href="/move_movie_to_watching/Watching/{{ show.status }}/{{ show.id }}" class="watching-btn"><i class='bx bx-play'></i></a>
                     {% endif %}
                     {% if show.type == "series" %}
-                    <a href="#" class="watching-btn" data-bs-toggle="modal" data-bs-target="#Watching_modal"><i class='bx bx-play'></i></a>
+                    <a href="#" class="watching-btn" data-bs-toggle="modal" data-bs-target="#Watching_modal{{ show.id }}"><i class='bx bx-play'></i></a>
                     {% endif %}
-                    <a href="#" class="delete-btn" data-bs-toggle="modal" data-bs-target="#remove_modal"><i class='bx bx-x'></i></a>
+                    <a href="#" class="delete-btn" data-bs-toggle="modal" data-bs-target="#remove_modal{{ show.id }}"><i class='bx bx-x'></i></a>
                 </div>
                 <!-- modal here -->
                 <!-- for user to move to watch later -->
                 <form action="/move_show_to_other_status/Want/{{ show.status }}/{{ show.id }}" method="post">
-                    <div class="modal fade" id="Want_modal" role="dialog">
+                    <div class="modal fade" id="Want_modal{{ show.id }}" role="dialog">
                         <div class="modal-dialog modal-sm modal-dialog-centered">
                             <div class="modal-content" style="background: rgb(26, 25, 25);">
                                 <div class="modal-header">
@@ -68,7 +68,7 @@
                 </form>
                 <!-- for user to select season and episode -->
                 <form action="/move_show_to_other_status/Watching/{{ show.status }}/{{ show.id }}" method="post">
-                    <div class="modal fade" id="Watching_modal" role="dialog">
+                    <div class="modal fade" id="Watching_modal{{ show.id }}" role="dialog">
                         <div class="modal-dialog modal-sm modal-dialog-centered">
                             <div class="modal-content" style="background: rgb(26, 25, 25);">
                                 <div class="modal-header">
@@ -90,7 +90,7 @@
                 </form>
                 <!-- for user to remove the show -->
                 <form action="/move_show_to_other_status/remove/{{ show.status }}/{{ show.id }}" method="post">
-                    <div class="modal fade" id="remove_modal" role="dialog">
+                    <div class="modal fade" id="remove_modal{{ show.id }}" role="dialog">
                         <div class="modal-dialog modal-sm modal-dialog-centered">
                             <div class="modal-content" style="background: rgb(26, 25, 25);">
                                 <div class="modal-header">

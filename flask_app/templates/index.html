@@ -123,7 +123,7 @@
                     </a>
                     {% endif %}
                     {% if show.type == "series" %}
-                    <a href="#" class="watch-btn comment-btn" data-bs-toggle="modal" data-bs-target="#Watching_modal">
+                    <a href="#" class="watch-btn comment-btn" data-bs-toggle="modal" data-bs-target="#Watching_modal{{ show.id }}">
                         <i class='bx bx-play'></i>
                     </a>
                     {% endif %}
@@ -134,7 +134,7 @@
                 <!-- modal here -->
                 <!-- for user to select season and episode -->
                 <form action="/move_show_to_other_status/Watching/{{ show.status }}/{{ show.id }}" method="post">
-                    <div class="modal fade" id="Watching_modal" role="dialog">
+                    <div class="modal fade" id="Watching_modal{{ show.id }}" role="dialog">
                         <div class="modal-dialog modal-sm modal-dialog-centered">
                             <div class="modal-content" style="background-color: rgb(26, 25, 25);">
                                 <div class="modal-header">
@@ -156,7 +156,7 @@
                 </form>
                 <!-- for user to rate and comment the show -->
                 <form action="/move_show_to_other_status/Watched/{{ show.status }}/{{ show.id }}" method="post">
-                    <div class="modal fade" id="Watched_modal" role="dialog">
+                    <div class="modal fade" id="Watched_modal{{ show.id }}" role="dialog">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content" style="background-color: rgb(26, 25, 25);">
                                 <div class="modal-header">
@@ -178,7 +178,7 @@
                 </form>
                 <!-- for user to remove the show -->
                 <form action="/move_show_to_other_status/remove/{{ show.status }}/{{ show.id }}" method="post">
-                    <div class="modal fade" id="remove_modal" role="dialog">
+                    <div class="modal fade" id="remove_modal{{ show.id }}" role="dialog">
                         <div class="modal-dialog modal-sm modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header" style="color: black;">

@@ -326,7 +326,7 @@ header{
 }
 
 /* Start make the page responsive */
-@media (max-width:1170px){
+@media (max-width:1180px){
     .navbar{
         bottom: 0;
         left: 0;
@@ -362,7 +362,7 @@ header{
     }
 }
 
-@media (max-width: 888px) {
+@media (max-width: 940px) {
     .nav{
         padding: 14px 0;
     }
@@ -386,11 +386,129 @@ header{
     .movie-progress{
         font-size: 0.6rem;
     }
+    .searchContainer{
+        margin-top: 100px !important;
+    }
+    .searchElement{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .text-center{
+        width: 400px !important;
+        font-size: 1.3rem;
+    }
+    #showSearchBox{
+        width: 400px !important;
+    }
+    #searchList{
+        width: 400px !important;
+    }
+    .searchItemInfo>h5{
+        font-size: 20px !important;
+        padding-top: 10px;
+    }
+    .searchItemInfo>p{
+        font-size: 15px !important;
+        padding-top: 16px;
+    }
+    .show-content-wrapper{
+        display: flex;
+        flex-direction: column !important;
+    }
+    .showPoster{
+        width: 60% !important;
+        margin: 20px auto;
+    }
+    .showInfo{
+        width: 100% !important;
+        font-size: 0.8rem;
+    }
+    .showTitle{
+        width: 95% !important;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 1.2rem;
+    }
+    .showTinyInfo{
+        display: flex;
+        justify-content: center;
+    }
+    .showRatingBox{
+        width: 100% !important;
+        font-size: 0.8rem;
+        margin: -20px 10px 0 0 !important;
+    }
+    .libraryList>nav>h4{
+        font-size: 0.9rem;
+        padding-top: 14px;
+        margin-left: 15px;
+    }
+    .libraryList>nav>div a{
+        font-size: 0.6rem;
+        margin-right: 15px;
+        margin-left: -15px;
+    }
+    .listBox{
+        display: grid !important;
+        grid-template-columns: 150px auto;
+        grid-gap: 10px;
+        height: auto !important;
+        padding: 10px !important;
+    }
+    .listBoxLeft{
+        margin: 0 auto !important;
+        width: 150px;
+    }
+
+    .listBoxLeft>img{
+        object-fit: contain !important;
+        vertical-align: top !important;
+    }
+
+    .listBoxMid{
+        font-size: 1rem;
+        width: 210px !important;
+    }
+
+    .listBoxMid>h4{
+        font-size: 1rem;
+        width: 100%;
+        padding-right: 5px;
+    }
+
+    .listBoxRight{
+        width: 380px !important;
+        margin: 0 auto !important;
+        height: 40px !important;
+    }
+    .listBoxRight>p>span{
+        font-size: 0.6rem !important;
+    }
+
+    .text-bg-light{
+        font-size: 0.6rem;
+    }
+
+    .yello-tiny{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start !important;
+        justify-content: center !important;
+    }
+
+    .yello-tiny>p{
+        margin-bottom: 3px;
+        font-size: 0.6rem !important;
+    }
+    .listBoxMidButton{
+        margin-top: 20px;
+    }
 }
 
 
 /* small device */
-@media(max-width: 412px){
+@media(max-width: 500px){
     .home{
         min-height: 300px;
     }
@@ -402,11 +520,115 @@ header{
         height: 35px;
     }
     .navbar{
-        justify-content: space-around;
+        justify-content: space-evenly;
         padding: 8px 0;
     }
+
+    .nav-link{
+        margin: 0 -5px;
+    }
+
     .nav-link .bx{
         font-size: 1.2rem;
+    }
+    .logout-btn{
+        width: 85px;
+        height: 40px;
+        font-size: 0.6rem;
+        text-align: center;
+    }
+    .logo{
+        font-size: 1.3rem;
+    }
+    .home-title{
+        font-size: 1.3rem;
+        margin-right: 10px;
+    }
+    .home-description{
+        font-size: 0.8rem !important;
+        width: 100% !important;
+        margin-right: 10px;
+    }
+    .copyright{
+        height: 150px !important;
+        font-size: 0.8rem !important;
+        margin: 0;
+        padding: 50px 0 0 0;
+    }
+    #register-btn{
+        font-size: 12px !important;
+    }
+    #home{
+        margin-top: 100px !important;
+    }
+    .searchContainer{
+        margin-top: 100px !important;
+    }
+    .searchElement{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .text-center{
+        width: 320px !important;
+        font-size: 1.1rem;
+    }
+    #showSearchBox{
+        width: 280px !important;
+    }
+    #searchList{
+        width: 280px !important;
+    }
+    .searchItemInfo>h5{
+        font-size: 15px !important;
+        padding-top: 5px;
+    }
+    .searchItemInfo>p{
+        font-size: 10px !important;
+        padding-top: 8px;
+    }
+    .heading{
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        height: 40px;
+    }
+    .heading-title{
+        font-size: 0.85rem;
+        padding-top: 10px;
+    }
+    .plot-wrapper>p{
+        font-size: 15px !important;
+        padding: 10px;
+    }
+    .user-comment-wrapper>.user-comment-box>h4{
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+    .user-comment-wrapper>.user-comment-box>p{
+        font-size: 0.8rem;
+        padding: 10px;
+    }
+    .text-bg-warning{
+        font-size: 0.5rem;
+    }
+    .resultGrid{
+        width: 100% !important;
+        margin: 5px !important;
+    }
+
+    .resultGrid form{
+        width: 100%;
+    }
+    .resultGrid>form>main{
+        width: 100%;
+    }
+    .show-content-wrapper{
+        width: 100%;
+    }
+    .homeContainer{
+        padding: 0;
+        width: 100% !important;
     }
 }
 

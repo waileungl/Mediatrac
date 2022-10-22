@@ -57,6 +57,7 @@ def to_user_show_library_by_status(status):
 def move_show_to_other_status_by_id(action, status, id):
     user_id = session["id"]
     if action == "remove":
+        print("&&&&&&&&&&&&&&&&&&&&")
         Shows.move_show_to_other_status_by_id(action, id, user_id)
         return redirect(f'/show/{status}')
     if action == "Want":
