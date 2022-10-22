@@ -480,10 +480,14 @@ header{
     .listBoxRight{
         width: 380px !important;
         margin: 0 auto !important;
-        height: 40px !important;
+        height: auto !important;
     }
     .listBoxRight>p>span{
         font-size: 0.6rem !important;
+    }
+
+    .listBoxRight>div{
+        font-size: 0.8rem !important;
     }
 
     .text-bg-light{

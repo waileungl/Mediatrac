@@ -31,9 +31,13 @@
             <div class="listBoxMid">
                 <h4><a href="/show/selected/{{ show.id }}"><span id="movie-title-color">{{ show.title }} ({{ show.year }})</span></a></h4>
                 <div class="listBoxMidTiny" style="margin-bottom: -10px;">
-                    <p><span class="badge rounded-pill text-bg-light">{{ show.country }}</span></p>
+                    {% if show.country | length > 25 %}
+                        <p style="font-size: 0.8rem;">{{ show.country }}</p>
+                    {% else %}
+                        <p><span class="badge rounded-pill text-bg-light">{{ show.country }}</span></p>
+                    {% endif %}
                 </div>
-                <div class="listBoxMidTiny">
+                <div class="listBoxMidTiny yello-tiny">
                     <p><span class="badge rounded-pill text-bg-warning">{{ show.runtime }} </span></p>
                     <p><span class="badge rounded-pill text-bg-warning"> {{ show.genre }}</span></p>
                 </div>
