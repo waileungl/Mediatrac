@@ -29,8 +29,24 @@
             <p class="rating"><b>imdb Rating:</b> <i class='bx bxs-star'></i> {{ info[0].rating }} /10</p>
             <p class="myRating"><b>My Rating:</b> <i class='bx bxs-star'></i> {% if info[0].user_rating != 0 %} {{ info[0].user_rating }} /10 {% else %} null {% endif %} </p>
             <div class="user_interaction">
-                <a class="btn btn-light" data-bs-toggle="modal" data-bs-target="#Watching_modal">Watching</a>
-                <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#Watched_modal">Rate</a>
+                {% for comment in info[1] %}
+                    {% if comment.user_id == session["id"] and comment.season != None and comment.episode != None and info[0].type == "series" %}
+                        <p class = "awards"><b><i class = "fas fa-award"></i></b>
+                            <span class="badge rounded-pill text-bg-primary">season {{ comment.season }} </span>
+                            <span class="badge rounded-pill text-bg-info">episode {{ comment.episode }}</span>
+                        </p>
+                        <a class="btn btn-light" data-bs-toggle="modal" data-bs-target="#Watching_modal{{ info[0].id }}">Edit watching</a>
+                    {% else %}
+                        <a class="btn btn-light" data-bs-toggle="modal" data-bs-target="#Watching_modal{{ info[0].id }}">Watching</a>
+                    {% endif %}
+                {% endfor %}
+                {% for comment in info[1] %}
+                    {% if comment.user_id == session["id"] and comment.comment != None %}
+                        <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#Watched_modal{{ info[0].id }}">Rate again</a>
+                    {% else %}
+                        <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#Watched_modal{{ info[0].id }}">Rate</a>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -60,7 +76,7 @@
     <!-- modal here -->
     <!-- for user to move to watch later -->
     <form action="/move_show_to_other_status/Want/{{ info[0].status }}/{{ info[0].id }}" method="post">
-        <div class="modal fade" id="Want_modal" role="dialog">
+        <div class="modal fade" id="Want_modal{{ info[0].id }}" role="dialog">
             <div class="modal-dialog modal-sm modal-dialog-centered">
                 <div class="modal-content" style="background: rgb(26, 25, 25);">
                     <div class="modal-header">
@@ -79,7 +95,7 @@
     </form>
     <!-- for user to select season and episode -->
     <form action="/move_show_to_other_status/Watching/{{ info[0].status }}/{{ info[0].id }}" method="post">
-        <div class="modal fade" id="Watching_modal" role="dialog">
+        <div class="modal fade" id="Watching_modal{{ info[0].id }}" role="dialog">
             <div class="modal-dialog modal-sm modal-dialog-centered">
                 <div class="modal-content" style="background: rgb(26, 25, 25);">
                     <div class="modal-header">
@@ -102,7 +118,7 @@
     </form>
     <!-- for user to comment and rate -->
     <form action="/move_show_to_other_status/Watched/{{ info[0].status }}/{{ info[0].id }}" method="post">
-        <div class="modal fade" id="Watched_modal" role="dialog">
+        <div class="modal fade" id="Watched_modal{{ info[0].id }}" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content" style="background: rgb(26, 25, 25);">
                     <div class="modal-header">
@@ -125,7 +141,7 @@
     </form>
     <!-- for user to remove the show -->
     <form action="/move_show_to_other_status/remove/{{ info[0].status }}/{{ info[0].id }}" method="post">
-        <div class="modal fade" id="remove_modal" role="dialog">
+        <div class="modal fade" id="remove_modal{{ info[0].id }}" role="dialog">
             <div class="modal-dialog modal-sm modal-dialog-centered">
                 <div class="modal-content" style="background: rgb(26, 25, 25);">
                     <div class="modal-header">

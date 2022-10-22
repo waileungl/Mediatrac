@@ -79,7 +79,7 @@ def move_movie_to_watching(action, status, id):
         return redirect('/')
     user_id = session["id"]
     Shows.add_movie_to_watching(action, id, user_id)
-    return redirect(f'/show/{status}')
+    return redirect(f'/show/{action}')
 
 @app.route('/show/favourate')
 def move_to_fav_page():
