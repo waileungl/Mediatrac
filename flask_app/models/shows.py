@@ -21,13 +21,21 @@ class Shows:
         self.status = data['status']
         self.season = data['season']
         self.episode = data['episode']
+
+        self.plot = data['plot']
+        self.nomination = data['nomination']
+        self.box_office = data['box_office']
+        self.language = data['language']
+        self.actors = data['actors']
+        self.writer = data['writer']
+        self.age_group = data['age_group']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
     
     @classmethod
     def add_show(cls, data):
         # Grab API data from browse show page into database
-        query = "INSERT INTO shows(poster, title, year, runtime, type, country, released, genre, rating, imdbID) VALUES (%(showPoster)s, %(showTitle)s, %(showYear)s, %(showRuntime)s, %(showType)s, %(showCountry)s, %(showReleased)s, %(showGenre)s, %(imdbRating)s, %(imdbID)s);"
+        query = "INSERT INTO shows(poster, title, year, runtime, type, country, released, genre, rating, imdbID, plot, nomination, box_office, language, actors, writer, age_group) VALUES (%(showPoster)s, %(showTitle)s, %(showYear)s, %(showRuntime)s, %(showType)s, %(showCountry)s, %(showReleased)s, %(showGenre)s, %(imdbRating)s, %(imdbID)s, %(plot)s, %(nomination)s, %(box_office)s, %(language)s, %(actors)s, %(writer)s, %(age_group)s);"
         connectToMySQL(db).query_db(query, data)
         # Get show.id by imdbID
         query2 = "SELECT id FROM shows WHERE imdbID = %(imdbID)s"
@@ -51,9 +59,9 @@ class Shows:
         return shows
 
     @classmethod
-    def get_ten_lastest_shows(cls, status, user_id):
+    def get_nine_lastest_shows(cls, status, user_id):
         # Get all info of the show by status and user_id
-        query = f"SELECT * FROM stored_shows LEFT JOIN shows ON shows.id = stored_shows.show_id WHERE status = '{status}' and stored_shows.user_id = {user_id} ORDER BY stored_shows.updated_at DESC LIMIT 9;"
+        query = f"SELECT * FROM stored_shows LEFT JOIN shows ON shows.id = stored_shows.show_id WHERE status = '{status}' and stored_shows.user_id = {user_id} ORDER BY stored_shows.updated_at DESC LIMIT 12;"
         results = connectToMySQL(db).query_db(query)
         shows = []
         for row in results:

@@ -11,18 +11,18 @@
         <div class="showInfo">
             <h3 class="showTitle">{{ info[0].title }} <span class="showYear"> ({{ info[0].year }})</span></h3>
             <div class="showTinyInfo">
-                <div class="rated"><span class="badge rounded-pill text-bg-secondary">PG-13</span> </div>
+                <div class="rated"><span class="badge rounded-pill text-bg-secondary">{{ info[0].age_group }}</span> </div>
                 <div class="runtime"><span class="badge rounded-pill text-bg-secondary">{{ info[0].runtime }}</span></div>
                 <div class="type"><span class="badge rounded-pill text-bg-secondary">{{ info[0].type }}</span> </div>
             </div>
-            <p class="writer"><b>Writer:</b> Lorem</p>
-            <p class="actors"><b>Actors:</b> Lorem</p>
+            <p class="writer"><b>Writer:</b> {{ info[0].writer }}</p>
+            <p class="actors"><b>Actors:</b>{{ info[0].actors }}</p>
             <p class="genre"><b>Genre:</b> {{ info[0].genre }}</p>
             <p class="country"><b>Country:</b> {{ info[0].country }}</p>
-            <p class="language"><b>Language:</b> English</p>
+            <p class="language"><b>Language:</b> {{ info[0].language }}</p>
             <p class="released"><b>Released:</b> {{ info[0].released }}</p>
-            <p class="boxOffice"><b>Box office:</b> 100,0000</p>
-            <p class = "awards"><b><i class = "fas fa-award"></i></b> <span class="badge rounded-pill text-bg-warning">10 Nomination</span>
+            <p class="boxOffice"><b>Box office:</b> {{ info[0].box_office }}</p>
+            <p class = "awards"><b><i class = "fas fa-award"></i></b> <span class="badge rounded-pill text-bg-warning">{{ info[0].nomination }}</span>
             </p>
         </div>
         <div class="showRatingBox">
@@ -32,18 +32,18 @@
                 {% for comment in info[1] %}
                     {% if comment.user_id == session["id"] and comment.season != None and comment.episode != None and info[0].type == "series" %}
                         <p class = "awards"><b><i class = "fas fa-award"></i></b>
-                            <span class="badge rounded-pill text-bg-primary">season {{ comment.season }} </span>
-                            <span class="badge rounded-pill text-bg-info">episode {{ comment.episode }}</span>
+                            <span class="badge badge text-bg-light">season {{ comment.season }} </span>
+                            <span class="badge badge text-bg-warning">episode {{ comment.episode }}</span>
                         </p>
                         <a class="btn btn-light" data-bs-toggle="modal" data-bs-target="#Watching_modal{{ info[0].id }}">Edit watching</a>
-                    {% else %}
+                    {% elif comment.user_id == session['id'] and info[0].type == "series" %}
                         <a class="btn btn-light" data-bs-toggle="modal" data-bs-target="#Watching_modal{{ info[0].id }}">Watching</a>
                     {% endif %}
                 {% endfor %}
                 {% for comment in info[1] %}
                     {% if comment.user_id == session["id"] and comment.comment != None %}
                         <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#Watched_modal{{ info[0].id }}">Rate again</a>
-                    {% else %}
+                    {% elif comment.user_id == session["id"] %}
                         <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#Watched_modal{{ info[0].id }}">Rate</a>
                     {% endif %}
                 {% endfor %}
@@ -55,7 +55,7 @@
         <div class="heading">
             <h2 class="heading-title">Story</h2>
         </div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, explicabo. Amet officia rerum eaque. Ipsa fugit explicabo ab, rem, quod inventore nihil et assumenda tempora non laboriosam earum quidem omnis!</p>
+        <p>{{ info[0].plot }}</p>
     </div>
 
     <div class="user-comment-wrapper">
@@ -63,11 +63,15 @@
             <h2 class="heading-title">Users' review</h2>
         </div>
         {% for comment in info[1] %}
-        <div class="user-comment-box">
-            <h4>{% if comment.user_id == session["id"] %} My {% else %} {{ comment.name }}'s  {% endif %}  review {% if not comment.user_id == session["id"] %} <a href="#"><span class="badge rounded-pill text-bg-warning" style="font-size: 1rem;">42 likes</span></a> {% endif %}</h4>
-            <p>{{ comment.comment }}</p>
-            <p><i class='bx bxs-star' style="color: gold;"></i>  {{ comment.user_rating }}/10 </p>
-        </div>
+            {% if comment.user_id == session["id"] and comment.user_rating == None %}
+                <span></span>
+            {% else %}
+                <div class="user-comment-box">
+                    <h4>{% if comment.user_id == session["id"] %} My {% else %} {{ comment.name }}'s  {% endif %}  review {% if not comment.user_id == session["id"] %} <a href="#"><span class="badge rounded-pill text-bg-warning" style="font-size: 1rem;">42 likes</span></a> {% endif %}</h4>
+                    <p>{{ comment.comment }}</p>
+                    <p><i class='bx bxs-star' style="color: gold;"></i>  {{ comment.user_rating }}/10 </p>
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 </main>
@@ -94,7 +98,7 @@
         </div>
     </form>
     <!-- for user to select season and episode -->
-    <form action="/move_show_to_other_status/Watching/{{ info[0].status }}/{{ info[0].id }}" method="post">
+    <form action="/show/selected/Watching/{{ info[0].id }}" method="post">
         <div class="modal fade" id="Watching_modal{{ info[0].id }}" role="dialog">
             <div class="modal-dialog modal-sm modal-dialog-centered">
                 <div class="modal-content" style="background: rgb(26, 25, 25);">
@@ -109,7 +113,6 @@
                         <input type="number" class="form-control" id="modal-episode" name="episode" value="">
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-secondary">It's a movie!</button>
                         <button type="submit" class="btn btn-success">Add</button>
                     </div>
                 </div>
@@ -117,7 +120,7 @@
         </div>
     </form>
     <!-- for user to comment and rate -->
-    <form action="/move_show_to_other_status/Watched/{{ info[0].status }}/{{ info[0].id }}" method="post">
+    <form action="/show/selected/Watched/{{ info[0].id }}" method="post">
         <div class="modal fade" id="Watched_modal{{ info[0].id }}" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content" style="background: rgb(26, 25, 25);">
@@ -140,7 +143,7 @@
         </div>
     </form>
     <!-- for user to remove the show -->
-    <form action="/move_show_to_other_status/remove/{{ info[0].status }}/{{ info[0].id }}" method="post">
+    <form action="/show/selected/remove/{{ info[0].id }}" method="post">
         <div class="modal fade" id="remove_modal{{ info[0].id }}" role="dialog">
             <div class="modal-dialog modal-sm modal-dialog-centered">
                 <div class="modal-content" style="background: rgb(26, 25, 25);">

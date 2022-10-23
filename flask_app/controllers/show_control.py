@@ -23,6 +23,13 @@ def add_show():
         "imdbRating": request.form["imdbRating"],
         "imdbID": request.form["imdbID"],
         "user_id": user_id,
+        "plot": request.form['showPlot'],
+        "nomination": request.form['showAwards'],
+        "box_office": request.form['showBoxOffice'],
+        "language": request.form['showLanguage'],
+        "actors": request.form['showActors'],
+        "writer": request.form['showWriter'],
+        "age_group": request.form['showAgeGroup'],
         "submit_button": request.form["submit_button"]
     }
     show_id = Shows.add_show(data)
@@ -53,24 +60,24 @@ def to_user_show_library_by_status(status):
     if status == "Watched": 
         return render_template("watched.html", watched_shows = Shows.get_all_shows(status, user_id), show_count = Shows.show_count(user_id)) 
 
-@app.route('/move_show_to_other_status/<action>/<status>/<id>', methods = ['POST'])
-def move_show_to_other_status_by_id(action, status, id):
+@app.route('/move_show_to_other_status/<action>/<status>/<show_id>', methods = ['POST'])
+def move_show_to_other_status_by_id(action, status, show_id):
     user_id = session["id"]
     if action == "remove":
-        Shows.move_show_to_other_status_by_id(action, id, user_id)
+        Shows.move_show_to_other_status_by_id(action, show_id, user_id)
         return redirect(f'/show/{status}')
     if action == "Want":
-        Shows.move_show_to_other_status_by_id(action, id, user_id)
-        return redirect(f'/show/{status}')
+        Shows.move_show_to_other_status_by_id(action, show_id, user_id)
+        return redirect(f'/show/{action}')
     if action == "Watching":
         season = request.form["season"]
         episode = request.form["episode"]
-        Shows.add_progress_to_watching(action, id, season, episode, user_id)
-        return redirect(f'/show/{status}')
+        Shows.add_progress_to_watching(action, show_id, season, episode, user_id)
+        return redirect(f'/show/{action}')
     if action == "Watched":
         user_rating = request.form["user_rating"]
         comment = request.form["comment"]
-        Shows.add_comment_to_watched_show(action, id, user_rating, comment, user_id)
+        Shows.add_comment_to_watched_show(action, show_id, user_rating, comment, user_id)
         return redirect(f'/show/{action}')
 
 @app.route('/move_movie_to_watching/<action>/<status>/<id>')
@@ -95,3 +102,20 @@ def get_show_by_id(show_id):
         return redirect('/')
     user_id = session["id"]
     return render_template('show_content.html', info = Shows.get_show_by_id(show_id, user_id))
+
+@app.route('/show/selected/<action>/<show_id>', methods = ['POST'])
+def action_to_selected_show(action, show_id):
+    if 'id' not in session:
+        return redirect('/')
+    user_id = session["id"]
+    if action == "Watching":
+        season = request.form["season"]
+        episode = request.form["episode"]
+        Shows.add_progress_to_watching(action, show_id, season, episode, user_id)
+        return redirect(f'/show/selected/{show_id}')
+    if action == "Watched":
+        user_rating = request.form["user_rating"]
+        comment = request.form["comment"]
+        Shows.add_comment_to_watched_show(action, show_id, user_rating, comment, user_id)
+        return redirect(f'/show/selected/{show_id}')
+

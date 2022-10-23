@@ -32,8 +32,17 @@ var swiper = new Swiper(".watching-content", {
             slidesPerView:3,
             spaceBetween: 15,
         },
+        900:{
+            slidesPerView:4,
+            spaceBetween: 10,
+        }
     }
 });
+
+// // Tooltip
+// $(document).ready(function(){
+//     $('[data-toggle="tooltip"]').tooltip();   
+// });
 
 
 
@@ -128,30 +137,36 @@ function displayShowDetails(details){
                 <input type="hidden" name="showTitle" value="${details.Title}">
                 <div class="showTinyInfo">
                     <div class="rated"><span class="badge rounded-pill text-bg-secondary">${details.Rated}</span> </div>
+                    <input type="hidden" name="showAgeGroup" value="${details.Rated}">
                     <div class="runtime"><span class="badge rounded-pill text-bg-secondary">${details.Runtime}</span></div>
                     <div class="type"><span class="badge rounded-pill text-bg-secondary">${details.Type}</span> </div>
                     <input type="hidden" name="showType" value="${details.Type}">
                     <input type="hidden" name="showRuntime" value="${details.Runtime}">
                 </div>
                 <p class="writer"><b>Writer:</b> ${details.Writer}</p>
+                <input type="hidden" name="showWriter" value="${details.Writer}">
                 <p class="actors"><b>Actors:</b> ${details.Actors}</p>
+                <input type="hidden" name="showActors" value="${details.Actors}">
                 <p class="genre"><b>Genre:</b> ${details.Genre}</p>
                 <input type="hidden" name="showGenre" value="${details.Genre}">
                 <p class="country"><b>Country:</b> ${details.Country}</p>
                 <input type="hidden" name="showCountry" value="${details.Country}">
                 <p class="language"><b>Language:</b> ${details.Language}</p>
+                <input type="hidden" name="showLanguage" value="${details.Language}">
                 <p class="released"><b>Released:</b> ${details.Released}</p>
                 <input type="hidden" name="showReleased" value="${details.Released}">
                 <p class="boxOffice"><b>Box office:</b> ${details.BoxOffice}</p>
+                <input type="hidden" name="showBoxOffice" value="${details.BoxOffice}">
                 <p class = "awards"><b><i class = "fas fa-award"></i></b> <span class="badge rounded-pill text-bg-warning">${details.Awards}</span>
                 </p>
+                <input type="hidden" name="showAwards" value="${details.Awards}">
                 <input type="hidden" name="imdbID" value="${details.imdbID}">
             </div>
             <div class="showRatingBox">
                 <p class="rating"><b>imdb Rating:</b> <i class='bx bxs-star'></i> ${details.imdbRating} /10</p>
                 <input type="hidden" name="imdbRating" value="${details.imdbRating}">
                 <div class="user_interaction">
-                    <input name="submit_button" value="Want" type="submit" class="btn btn-primary">
+                    <input name="submit_button" value="Want" type="submit" class="btn btn-light">
                     <a class="btn btn-light" data-bs-toggle="modal" data-bs-target="#Watching_modal">Watching</a>
                     <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#Watched_modal">Watched</a>
                 </div>
@@ -163,6 +178,7 @@ function displayShowDetails(details){
                 <h2 class="heading-title">Story</h2>
             </div>
             <p>${details.Plot}</p>
+            <input type="hidden" name="showPlot" value="${details.Plot}">
         </div>
 
     </main>
@@ -198,6 +214,14 @@ function displayShowDetails(details){
         <input type="hidden" name="imdbID" value="${details.imdbID}">
         <input type="hidden" name="imdbRating" value="${details.imdbRating}">
         <input type="hidden" name="showType" value="${details.Type}">
+        
+        <input type="hidden" name="showPlot" value="${details.Plot}">
+        <input type="hidden" name="showAwards" value="${details.Awards}">
+        <input type="hidden" name="showBoxOffice" value="${details.BoxOffice}">
+        <input type="hidden" name="showLanguage" value="${details.Language}">
+        <input type="hidden" name="showActors" value="${details.Actors}">
+        <input type="hidden" name="showWriter" value="${details.Writer}">
+        <input type="hidden" name="showAgeGroup" value="${details.Rated}">
         <input type="hidden" name="submit_button" value="Watching">
     </form>
 
@@ -231,6 +255,13 @@ function displayShowDetails(details){
         <input type="hidden" name="imdbID" value="${details.imdbID}">
         <input type="hidden" name="imdbRating" value="${details.imdbRating}">
         <input type="hidden" name="showType" value="${details.Type}">
+        <input type="hidden" name="showPlot" value="${details.Plot}">
+        <input type="hidden" name="showAwards" value="${details.Awards}">
+        <input type="hidden" name="showBoxOffice" value="${details.BoxOffice}">
+        <input type="hidden" name="showLanguage" value="${details.Language}">
+        <input type="hidden" name="showActors" value="${details.Actors}">
+        <input type="hidden" name="showWriter" value="${details.Writer}">
+        <input type="hidden" name="showAgeGroup" value="${details.Rated}">
         <input type="hidden" name="submit_button" value="Watched">
     </form>
     `;
@@ -241,3 +272,5 @@ window.addEventListener('click', (event) => {
         searchList.classList.add('hideSearchList');
     }
 })
+
+

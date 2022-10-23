@@ -154,10 +154,12 @@ header{
     color: var(--text-color);
 }
 
+
 .watch-btn:hover{
-    color: var(--hover-color);
+    color: var(--text-color) ;
     transition: 0.3s all linear;
 }
+
 
 /* target the movie comment button */
 .comment-btn{
@@ -199,13 +201,20 @@ header{
 .heading-title{
     font-size: 1.2rem;
     font-weight: 500;
+    padding-top: 10px;
 }
+
+.heading-title:hover{
+    color: var(--hover-color);
+    transition: 0.4s all linear;
+}
+
 
 /* movie box */
 .movie-box{
     position: relative;
     width: 100%;
-    height: 500px;
+    height: 380px;
     overflow: hidden;
 }
 
@@ -233,20 +242,20 @@ header{
 .movie-title{
     font-size: 1.1rem;
     font-weight: 500;
-    padding-right: 20px;
+    width: 100%;
 }
 
-#movie-title-color{
+
+.movie-title-color{
     color: var(--text-color);
 }
 
-#movie-title-color:hover{
+.movie-title-color:hover{
     color: var(--hover-color)
 }
 
 .movie-progress{
     font-size: 0.9rem;
-    padding-right: 20px;
 }
 
 /* relocated swiper btns */
@@ -276,7 +285,7 @@ header{
 
 .movies-content{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(247px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
     gap: 1.5rem;
 }
 
@@ -780,7 +789,8 @@ header{
 }
 
 .nav-badge:hover{
-    font-size: 0.85rem;
+    font-size: 0.83rem;
+    transition: 0.2s all linear;
 }
 
 .libraryList .listBox{
@@ -859,10 +869,10 @@ header{
 }
 
 .want-btn .bx{
-    font-size: 21px;
+    font-size: 23px;
     background: var(--main-color);
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -881,10 +891,10 @@ header{
 }
 
 .watching-btn .bx{
-    font-size: 21px;
+    font-size: 28px;
     background: var(--main-color);
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -904,10 +914,10 @@ header{
 }
 
 .watched-small-btn .bx{
-    font-size: 16px;
+    font-size: 18px;
     background: var(--main-color);
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -926,10 +936,10 @@ header{
 }
 
 .delete-btn .bx{
-    font-size: 21px;
+    font-size: 23px;
     background: salmon;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     justify-content: center;

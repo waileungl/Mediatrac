@@ -79,24 +79,24 @@
         <div class="watching-content swiper">
             <div class="swiper-wrapper">
                 <!-- watching movie boxes -->
-                {% for show in ten_watching_shows %}
-                <div class="swiper-slide">
-                    <div class="movie-box">
-                        <img src="{{ show.poster }}" alt="" class="movie-box-img">
-                        <div class="box-text">
-                            <h2 class="movie-title"><a href="/show/selected/{{ show.id }}" ><span id="movie-title-color">{{ show.title }}</span></a></h2>
-                            {% if show.type == "series" %}
-                            <span class="movie-progress">
-                                <span class="badge rounded-pill text-bg-dark">Season {{ show.season }}</span>
-                                <span class="badge rounded-pill text-bg-warning">Episode {{ show.episode }}</span>
-                            </span>
-                            {% endif %}
-                            <!-- <a href="#" class="watch-btn comment-btn">
-                                <i class='bx bxs-message-dots'></i>
-                            </a> -->
+                {% for show in nine_watching_shows %}
+                    <div class="swiper-slide">
+                        <div class="movie-box">
+                            <img src="{{ show.poster }}" alt="" class="movie-box-img">
+                            <div class="box-text">
+                                <h2 class="movie-title"><a href="/show/selected/{{ show.id }}" ><span class="movie-title-color">{{ show.title }}</span></a></h2>
+                                {% if show.type == "series" %}
+                                <span class="movie-progress">
+                                    <span class="badge rounded-pill text-bg-light">Season {{ show.season }}</span>
+                                    <span class="badge rounded-pill text-bg-warning">Episode {{ show.episode }}</span>
+                                </span>
+                                {% endif %}
+                                <!-- <a href="#" class="watch-btn comment-btn">
+                                    <i class='bx bxs-message-dots'></i>
+                                </a> -->
+                            </div>
                         </div>
                     </div>
-                </div>
                 {% endfor %}
             </div>
         </div>
@@ -106,27 +106,17 @@
     <!-- library section start -->
     <section class="movies container" id="movies">
         <div class="heading">
-            <a href="/show/Want" style="color: #fcfeff;"><h2 class="heading-title">Watch Later</h2></a>
+            <a href="/show/Want" style="color: #fcfeff;"><h2 class="heading-title">Watchlist</h2></a>
         </div>
         <!-- to watch content -->
         <div class="movies-content">
             <!-- movie boxes -->
-            {% for show in ten_to_watch_shows %}
+            {% for show in nine_to_watch_shows %}
             <div class="movie-box">
                 <img src="{{ show.poster }}" alt="" class="movie-box-img">
                 <div class="box-text">
-                    <h2 class="movie-title"><a href="/show/selected/{{ show.id }}" ><span id="movie-title-color">{{ show.title }}</span></a></h2>
+                    <h2 class="movie-title"><a href="/show/selected/{{ show.id }}" ><span class="movie-title-color">{{ show.title }}</span></a></h2>
                     <span class="movie-progress">{{ show.genre }}</span>
-                    {% if show.type == "movie" %}
-                    <a href="/move_movie_to_watching/Watching/{{ show.status }}/{{ show.id }}" class="watch-btn comment-btn">
-                        <i class='bx bx-play'></i>
-                    </a>
-                    {% endif %}
-                    {% if show.type == "series" %}
-                    <a href="#" class="watch-btn comment-btn" data-bs-toggle="modal" data-bs-target="#Watching_modal{{ show.id }}">
-                        <i class='bx bx-play'></i>
-                    </a>
-                    {% endif %}
                 </div>
             </div>
             <!-- to prevent modal occupying space -->

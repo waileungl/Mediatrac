@@ -4,7 +4,7 @@
 <main class="homeContainer container">
     <div class="libraryList">
         <nav>
-            <h4>Plan to watch ({{ show_count[0].count }})</h4>
+            <h4>Watchlist ({{ show_count[0].count }})</h4>
             <div>
                 <a href="/show/Watching" class="badge text-bg-light nav-badge position-relative">
                     watching
@@ -29,7 +29,7 @@
                 <img src="{{ show.poster }}" alt="" class="movie-box-img">
             </div>
             <div class="listBoxMid">
-                <h4><a href="/show/selected/{{ show.id }}"><span id="movie-title-color">{{ show.title }} ({{ show.year }})</span></a></h4>
+                <h4><a href="/show/selected/{{ show.id }}"><span class="movie-title-color">{{ show.title }} ({{ show.year }})</span></a></h4>
                 <div class="listBoxMidTiny" style="margin-bottom: -10px;">
                     <p><span class="badge rounded-pill text-bg-light">{{ show.country }}</span></p>
                 </div>
@@ -38,15 +38,12 @@
                     <p><span class="badge rounded-pill text-bg-warning"> {{ show.genre }}</span></p>
                 </div>
                 <div class="listBoxMidButton">
-                    {% if show.type == "movie" %}
-                    <a href="/move_movie_to_watching/Watching/{{ show.status }}/{{ show.id }}" class="watching-btn"><i class='bx bx-play'></i></a>
-                    {% endif %}
-                    {% if show.type == "series" %}
-                    <a href="#" class="watching-btn" data-bs-toggle="modal" data-bs-target="#Watching_modal{{ show.id }}"><i class='bx bx-play'></i></a>
-                    {% endif %}
-                    <a href="#" class="watched-small-btn" data-bs-toggle="modal" data-bs-target="#Watched_modal{{ show.id }}">
+                    <a href="#" class="watched-small-btn" data-bs-toggle="modal" data-bs-target="#Watched_modal{{ show.id }}" data-toggle="tooltip" data-placement="bottom" title="Add to watched">
                         <i class='bx bxs-message-dots'></i></a>
-                    <a href="#" class="delete-btn" data-bs-toggle="modal" data-bs-target="#remove_modal{{ show.id }}"><i class='bx bx-x'></i></a>
+                    {% if show.type == "series" %}
+                    <a href="#" class="watching-btn" data-bs-toggle="modal" data-bs-target="#Watching_modal{{ show.id }}" data-toggle="tooltip" data-placement="bottom" title="Add to watching"><i class='bx bx-play'></i></a>
+                    {% endif %}
+                    <a href="#" class="delete-btn" data-bs-toggle="modal" data-bs-target="#remove_modal{{ show.id }}" data-toggle="tooltip" data-placement="bottom" title="Remove"><i class='bx bx-x'></i></a>
                 </div>
                 <!-- modal here -->
                 <!-- for user to comment and rate -->
